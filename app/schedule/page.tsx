@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
+
 const ScheduleList = () => {
   const [schedules, setSchedules] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -9,7 +12,7 @@ const ScheduleList = () => {
   const fetchSchedules = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/schedule");
+      const response = await fetch(`${API_BASE_URL}/api/schedule`);
       const data = await response.json();
       setSchedules(data.scheduleList || []);
     } catch (error) {
@@ -21,7 +24,7 @@ const ScheduleList = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch("/api/schedule", {
+      const response = await fetch(`${API_BASE_URL}/api/schedule`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

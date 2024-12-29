@@ -3,7 +3,32 @@ import { useState } from "react";
 import { useStore } from "../store";
 import Link from "next/link";
 
-const Form = ({ mailingTemplates, recipientLists }) => {
+interface Template {
+  id: number;
+  name: string;
+  content: string;
+}
+
+interface RecipientList {
+  id: number;
+  name: string;
+  users: {
+    id: number;
+    email: string;
+    firstName: string;
+    category: string;
+  }[];
+}
+interface FormProps {
+  mailingTemplates: Template[];
+  recipientLists: RecipientList[];
+}
+
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
+
+
+const Form: React.FC<FormProps> = ({ mailingTemplates, recipientLists }) => {
   const setSelectedTemplate = useStore((state) => state.setSelectedTemplate);
   const setSelectedList = useStore((state) => state.setSelectedList);
   const [schedule, setSchedule] = useState("");
@@ -21,7 +46,7 @@ const Form = ({ mailingTemplates, recipientLists }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/schedule", {
+      const response = await fetch(`${API_BASE_URL}/api/schedule`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,13 +83,13 @@ const Form = ({ mailingTemplates, recipientLists }) => {
           onChange={(e) =>
             setSelectedTemplate(
               mailingTemplates.find(
-                (template: any) => template.id === Number(e.target.value)
-              )
+                (template: Template) => template.id === Number(e.target.value)
+              ) ?? null
             )
           }
         >
           <option value="">-- Select Mailer --</option>
-          {mailingTemplates.map((template: any) => (
+          {mailingTemplates.map((template: Template) => (
             <option key={template.id} value={template.id}>
               {template.name}
             </option>
@@ -80,13 +105,14 @@ const Form = ({ mailingTemplates, recipientLists }) => {
           onChange={(e) =>
             setSelectedList(
               recipientLists.find(
-                (recipient: any) => recipient.id === Number(e.target.value)
-              )
+                (recipient: RecipientList) =>
+                  recipient.id === Number(e.target.value)
+              ) ?? null
             )
           }
         >
           <option value="">-- Select List --</option>
-          {recipientLists.map((list: any) => (
+          {recipientLists.map((list: RecipientList) => (
             <option key={list.id} value={list.id}>
               {list.name}
             </option>
