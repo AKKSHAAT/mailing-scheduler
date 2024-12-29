@@ -44,7 +44,7 @@ const Form = ({ mailingTemplates, recipientLists }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-xs space-y-6"
+      className="bg-gray-800 p-8 rounded-lg shadow-lg w-full  max-w-md space-y-6"
     >
       <h1 className="text-2xl font-bold text-center text-blue-400">
         Schedule Mailing ✉️

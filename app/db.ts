@@ -83,4 +83,10 @@ export const recipientLists = [
 ];
 
 
-export let scheduleList = [];
+interface Schedule {
+  mailer: string;
+  list: string;
+  schedule: string;
+}
+
+export let scheduleList: Schedule[] = [];

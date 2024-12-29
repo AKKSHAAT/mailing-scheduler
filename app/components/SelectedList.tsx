@@ -6,7 +6,7 @@ const SelectedList = () => {
   const selectedList = useStore((state) => state.selectedList);
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col max-w-xs gap-4">
+    <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col max-w-lg gap-4">
       <h2 className="text-xl font-bold text-blue-400 text-center">
         Selected List
       </h2>
