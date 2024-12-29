@@ -3,7 +3,7 @@ export const mailingTemplates = [
     id: 1,
     name: "Welcome Email",
     content:
-      "<h1>Welcome to [Company Name], [First Name]!</h1><p>We’re thrilled to have you join us. Check out our services and make the most out of your journey!</p><a href='[CTA Link]' style='background-color: #007BFF; color: white; padding: 10px 15px; text-decoration: none;'>Get Started</a>",
+      "<h1>Welcome, [First Name]!</h1><p>We’re thrilled to have you join us. Check out our services and make the most out of your journey!</p><a href='[CTA Link]' style='background-color: #007BFF; color: white; padding: 10px 15px; text-decoration: none;'>Get Started</a>",
   },
   {
     id: 2,
