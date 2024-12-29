@@ -3,6 +3,7 @@ import { useStore } from '../store';
 
 const TemplateDisplay = () => {
     const selectedTemplate = useStore((state) => state.selectedTemplate);
+    
   
     return (
       <div className="text-white max-w-sm">

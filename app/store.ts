@@ -2,5 +2,7 @@ import { create } from "zustand";
 
 export const useStore = create((set) => ({
   selectedTemplate: null,
-  setSelectedTemplate: (template) => set({ selectedTemplate: template }), // Accept full template
+  selectedList: null,
+  setSelectedTemplate: (template) => set({ selectedTemplate: template }),
+  setSelectedList: (list) => set({selectedList: list }),
 }));

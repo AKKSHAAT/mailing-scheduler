@@ -81,3 +81,6 @@ export const recipientLists = [
     ],
   },
 ];
+
+
+export let scheduleList = [];
