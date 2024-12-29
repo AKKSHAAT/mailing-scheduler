@@ -1,24 +1,32 @@
-import { Suspense } from "react";
+"use client"; // Important for client-side fetching
+
+import { useEffect, useState } from "react";
 import Form from "./components/Form";
 import TemplateDisplay from "./components/TemplateDisplay";
 import SelectedList from "./components/SelectedList";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
 
-// Fetch data on the server side
-const fetchData = async () => {
-  const templateReq = await fetch(`${API_BASE_URL}/api/mailer`);
-  const listReq = await fetch(`${API_BASE_URL}/api/recipient`);
+export default function Home() {
+  const [mailingTemplates, setMailingTemplates] = useState<any[]>([]);
+  const [recipientLists, setRecipientLists] = useState<any[]>([]);
 
-  const { mailingTemplates } = await templateReq.json();
-  const { recipientLists } = await listReq.json();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const templateReq = await fetch(`${API_BASE_URL}/api/mailer`);
+        const listReq = await fetch(`${API_BASE_URL}/api/recipient`);
+        const { mailingTemplates } = await templateReq.json();
+        const { recipientLists } = await listReq.json();
+        setMailingTemplates(mailingTemplates || []);
+        setRecipientLists(recipientLists || []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  return { mailingTemplates, recipientLists };
-};
-
-// Export page with async fetch data
-export default async function Home() {
-  const { mailingTemplates, recipientLists } = await fetchData();
+    fetchData();
+  }, []);
 
   return (
     <div className="grid grid-cols-3 gap-4 min-h-screen bg-gray-900 text-white p-4">
